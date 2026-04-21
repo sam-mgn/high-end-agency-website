@@ -1,6 +1,8 @@
 "use client"
 
 import { Palette, TrendingUp, Users, Megaphone, Camera, LineChart } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 const services = [
   {
@@ -61,6 +63,16 @@ export function ServicesSection() {
           <p className="text-[#333C33] text-lg leading-relaxed">
             Une gamme complète de services pour accompagner votre croissance, de la stratégie à l&apos;exécution créative.
           </p>
+        </div>
+
+        {/* CTA */}
+        <div className="text-center mb-12">
+          <Button
+            asChild
+            className="bg-[#5AB4B4] text-[#0D1826] hover:bg-[#4A9F9F] font-semibold px-8 rounded-full"
+          >
+            <Link href="#contact">Demander un devis</Link>
+          </Button>
         </div>
 
         {/* Services Grid */}

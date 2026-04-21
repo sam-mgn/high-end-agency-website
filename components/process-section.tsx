@@ -1,6 +1,8 @@
 "use client"
 
 import { Search, Lightbulb, Rocket, BarChart3 } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 const steps = [
   {
@@ -87,6 +89,16 @@ export function ProcessSection() {
               </ul>
             </div>
           ))}
+        </div>
+
+        {/* CTA */}
+        <div className="text-center mt-12">
+          <Button
+            asChild
+            className="bg-[#5AB4B4] text-[#0D1826] hover:bg-[#4A9F9F] font-semibold px-8 rounded-full"
+          >
+            <Link href="#contact">Commencer un projet</Link>
+          </Button>
         </div>
       </div>
     </section>

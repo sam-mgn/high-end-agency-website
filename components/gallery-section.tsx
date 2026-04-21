@@ -2,6 +2,8 @@
 
 import { useState } from "react"
 import Image from "next/image"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 const categories = ["Tout", "Branding", "Print", "Signalétique"]
 
@@ -103,8 +105,18 @@ export function GallerySection() {
                   {project.category}
                 </span>
               </div>
-            </div>
-          ))}
+</div>
+            ))}
+        </div>
+
+        {/* CTA */}
+        <div className="text-center mt-12">
+          <Button
+            asChild
+            className="bg-[#5AB4B4] text-[#0D1826] hover:bg-[#4A9F9F] font-semibold px-8 rounded-full"
+          >
+            <Link href="#contact">Discutons de votre projet</Link>
+          </Button>
         </div>
       </div>
     </section>
