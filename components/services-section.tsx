@@ -53,9 +53,9 @@ export function ServicesSection() {
           </div>
           
           <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-[#0D1826] leading-tight mb-6">
-            Des Solutions Complètes Pour{" "}
+            Des solutions complètes pour{" "}
             <br className="hidden sm:block" />
-            Votre <span className="text-[#5AB4B4]">Communication</span>
+            votre <span className="text-[#5AB4B4]">communication</span>
           </h2>
           
           <p className="text-[#333C33] text-lg leading-relaxed">

@@ -44,8 +44,8 @@ export function ProcessSection() {
             <span className="text-[#5AB4B4] text-sm font-medium">Notre Approche</span>
           </div>
           <h2 className="text-3xl lg:text-4xl font-bold text-[#0D1826]">
-            Une Méthodologie{" "}
-            <span className="text-[#5AB4B4]">Éprouvée</span>
+            Une méthodologie{" "}
+            <span className="text-[#5AB4B4]">éprouvée</span>
           </h2>
         </div>
 

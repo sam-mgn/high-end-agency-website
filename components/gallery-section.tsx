@@ -51,10 +51,10 @@ export function GallerySection() {
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
           <h2 className="text-3xl lg:text-4xl font-bold text-[#0D1826] leading-tight mb-4">
-            Découvrez Nos Projets de Communication Stratégique
+            Découvrez nos projets de communication stratégique
           </h2>
           <p className="text-[#5AB4B4] text-xl font-medium">
-            Galerie de Travail
+            Galerie de travail
           </p>
         </div>
 

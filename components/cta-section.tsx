@@ -8,9 +8,9 @@ export function CtaSection() {
     <section className="py-16 lg:py-20 bg-[#5AB4B4]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-[#0D1826] leading-tight mb-6">
-          Donnez Vie À Votre Stratégie
+          Donnez vie à votre stratégie
           <br />
-          De Communication
+          de communication
         </h2>
 
         <p className="text-[#0D1826]/80 text-lg max-w-2xl mx-auto mb-10 leading-relaxed">

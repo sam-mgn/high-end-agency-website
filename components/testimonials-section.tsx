@@ -61,8 +61,8 @@ export function TestimonialsSection() {
               <span className="text-[#5AB4B4] text-sm font-medium">Témoignages</span>
             </div>
             <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-[#0D1826] leading-tight mb-8">
-              Ce Que Disent Nos{" "}
-              <span className="text-[#5AB4B4]">Clients</span>
+              Ce que disent nos{" "}
+              <span className="text-[#5AB4B4]">clients</span>
             </h2>
             
             {/* Navigation Arrows */}

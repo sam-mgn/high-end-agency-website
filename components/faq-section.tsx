@@ -36,7 +36,7 @@ export function FaqSection() {
           <div>
             <h2 className="text-3xl lg:text-4xl font-bold text-[#0D1826] leading-tight mb-8">
               Questions{" "}
-              <span className="text-[#5AB4B4]">Fréquemment Posées</span>
+              <span className="text-[#5AB4B4]">fréquemment posées</span>
             </h2>
             
             {/* FAQ Image */}
