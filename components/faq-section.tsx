@@ -29,7 +29,7 @@ const faqs = [
 
 export function FaqSection() {
   return (
-    <section id="faq" className="py-24 lg:py-32 bg-white">
+    <section id="faq" className="py-16 lg:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Left side - Title & Image */}

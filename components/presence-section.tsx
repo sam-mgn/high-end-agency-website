@@ -4,7 +4,7 @@ import Image from "next/image"
 
 export function PresenceSection() {
   return (
-    <section className="py-24 lg:py-32 bg-[#E5F0DD]">
+    <section className="py-16 lg:py-20 bg-[#E5F0DD]">
       {/* Brand Identity Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-[#0D1826] rounded-3xl p-12 lg:p-16 overflow-hidden">
