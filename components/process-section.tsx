@@ -39,8 +39,13 @@ export function ProcessSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
+          {/* Badge */}
+          <div className="inline-flex items-center bg-[#E5F0DD] rounded-full px-4 py-2 mb-6">
+            <span className="text-[#5AB4B4] text-sm font-medium">Notre Approche</span>
+          </div>
           <h2 className="text-3xl lg:text-4xl font-bold text-[#0D1826]">
-            Notre Méthodologie
+            Une Méthodologie{" "}
+            <span className="text-[#5AB4B4]">Éprouvée</span>
           </h2>
         </div>
 
