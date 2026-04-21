@@ -65,16 +65,6 @@ export function ServicesSection() {
           </p>
         </div>
 
-        {/* CTA */}
-        <div className="text-center mb-12">
-          <Button
-            asChild
-            className="bg-[#5AB4B4] text-[#0D1826] hover:bg-[#4A9F9F] font-semibold px-8 rounded-full"
-          >
-            <Link href="#contact">Demander un devis</Link>
-          </Button>
-        </div>
-
         {/* Services Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => (
@@ -108,6 +98,16 @@ export function ServicesSection() {
               </ul>
             </div>
           ))}
+        </div>
+
+        {/* CTA */}
+        <div className="text-center mt-12">
+          <Button
+            asChild
+            className="bg-[#5AB4B4] text-[#0D1826] hover:bg-[#4A9F9F] font-semibold px-8 rounded-full"
+          >
+            <Link href="#contact">Demander un devis</Link>
+          </Button>
         </div>
       </div>
     </section>
