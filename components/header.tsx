@@ -20,21 +20,21 @@ export function Header() {
   }, [])
 
   const navItems = [
-    { href: "#accueil", label: "Accueil" },
-    { href: "#apropos", label: "Reocom" },
+    { href: "#accueil", label: "ACCUEIL" },
+    { href: "#apropos", label: "REOCOM" },
     { 
       href: "#services", 
-      label: "Prestations",
+      label: "PRESTATIONS",
       dropdown: [
-        { href: "#strategie", label: "Strategie de Communication" },
-        { href: "#identite", label: "Identite Visuelle" },
+        { href: "#strategie", label: "Stratégie de Communication" },
+        { href: "#identite", label: "Identité Visuelle" },
         { href: "#digital", label: "Marketing Digital" },
-        { href: "#contenu", label: "Creation de Contenu" },
+        { href: "#contenu", label: "Création de Contenu" },
       ]
     },
     { 
       href: "#realisations", 
-      label: "Galerie",
+      label: "GALERIE",
       dropdown: [
         { href: "#projets", label: "Nos Projets" },
         { href: "#portfolio", label: "Portfolio" },
@@ -175,7 +175,7 @@ export function Header() {
                 className="hidden sm:inline-flex bg-[#5AB4B4] text-[#0D1826] hover:bg-white hover:text-[#0D1826] font-semibold px-5 h-10 rounded-lg transition-all duration-300 group"
               >
                 <Link href="#contact" className="flex items-center gap-2">
-                  Devis Gratuit
+                  DEVIS GRATUIT
                   <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
                 </Link>
               </Button>
@@ -235,7 +235,7 @@ export function Header() {
               className="w-full bg-[#5AB4B4] text-[#0D1826] hover:bg-white font-semibold h-12 rounded-lg"
             >
               <Link href="#contact" onClick={() => setIsMenuOpen(false)}>
-                Devis Gratuit
+                DEVIS GRATUIT
               </Link>
             </Button>
           </div>
