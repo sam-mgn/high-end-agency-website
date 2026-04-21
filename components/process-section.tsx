@@ -37,6 +37,13 @@ export function ProcessSection() {
   return (
     <section className="py-20 lg:py-28 bg-[#E5F0DD]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-3xl lg:text-4xl font-bold text-[#0D1826]">
+            Notre Méthodologie
+          </h2>
+        </div>
+
         {/* Process Cards */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {steps.map((step, index) => (
