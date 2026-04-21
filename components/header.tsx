@@ -23,11 +23,11 @@ export function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <Image
-              src="/images/logo.png"
+              src="/images/logo-dark.png"
               alt="REOCOM"
-              width={140}
-              height={40}
-              className="h-10 w-auto"
+              width={160}
+              height={45}
+              className="h-11 w-auto"
               priority
             />
           </Link>
