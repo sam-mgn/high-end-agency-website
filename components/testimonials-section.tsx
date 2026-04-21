@@ -30,14 +30,7 @@ const testimonials = [
   },
 ]
 
-const clientLogos = [
-  "Digise",
-  "TechStart",
-  "InnovaGroup",
-  "EcoBeauty",
-  "MediaPlus",
-  "CreativeHub",
-]
+
 
 export function TestimonialsSection() {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -122,19 +115,7 @@ export function TestimonialsSection() {
           </div>
         </div>
 
-        {/* Client Logos */}
-        <div className="mt-20 pt-12 border-t border-[#0D1826]/10">
-          <div className="flex flex-wrap items-center justify-center gap-8 lg:gap-16">
-            {clientLogos.map((logo, index) => (
-              <div
-                key={index}
-                className="text-[#333C33]/40 font-semibold text-lg tracking-wide hover:text-[#5AB4B4] transition-colors cursor-default"
-              >
-                {logo}
-              </div>
-            ))}
-          </div>
-        </div>
+        
       </div>
     </section>
   )
