@@ -42,20 +42,20 @@ export function HeroSection() {
             <Button
               asChild
               size="lg"
-              className="bg-[#5AB4B4] text-[#0D1826] hover:bg-[#5AB4B4]/90 font-medium px-8 py-6 text-sm uppercase tracking-wider rounded-full"
+              className="bg-[#5AB4B4] text-[#0D1826] hover:bg-[#4A9F9F] font-semibold px-8 py-6 text-sm uppercase tracking-wider rounded-full"
             >
               <Link href="#services">
-                Prestations
+                Découvrir nos services
               </Link>
             </Button>
             <Button
               asChild
               variant="outline"
               size="lg"
-              className="border-white/40 text-white hover:bg-white/10 hover:text-white px-8 py-6 text-sm uppercase tracking-wider rounded-full bg-transparent"
+              className="border-2 border-[#5AB4B4] text-[#5AB4B4] hover:bg-[#5AB4B4] hover:text-[#0D1826] px-8 py-6 text-sm uppercase tracking-wider rounded-full bg-transparent font-semibold transition-all"
             >
               <Link href="#contact">
-                Commencer
+                Devis
               </Link>
             </Button>
           </div>

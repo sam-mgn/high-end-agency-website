@@ -66,7 +66,7 @@ export function Header() {
                 className="hidden sm:flex items-center gap-2 text-white/60 hover:text-[#5AB4B4] transition-colors text-xs tracking-wide"
               >
                 <Phone size={12} className="text-[#5AB4B4]" />
-                <span>06 02 29 96 60</span>
+                <span>06.02.29.96.60</span>
               </a>
             </div>
 
