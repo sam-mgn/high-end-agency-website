@@ -35,7 +35,7 @@ const steps = [
 
 export function ProcessSection() {
   return (
-    <section className="py-16 lg:py-20 bg-[#E5F0DD]">
+    <section className="py-16 lg:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -49,7 +49,7 @@ export function ProcessSection() {
           {steps.map((step, index) => (
             <div
               key={index}
-              className="bg-white/70 backdrop-blur-sm rounded-3xl p-8 hover:shadow-lg transition-shadow duration-300"
+              className="bg-[#F8FAF7] rounded-3xl p-8 hover:shadow-lg transition-shadow duration-300"
             >
               {/* Step number */}
               <div className="w-14 h-14 bg-[#0D1826] rounded-full flex items-center justify-center mb-8">
