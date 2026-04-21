@@ -34,7 +34,7 @@ export function HeroSection() {
 
           {/* Subtitle */}
           <p className="text-white/70 text-base lg:text-lg max-w-2xl mb-10 leading-relaxed">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Nous accompagnons les entreprises dans leur communication digitale. De l&apos;identité visuelle à la stratégie de contenu, nous créons des solutions sur mesure pour valoriser votre marque.
           </p>
 
           {/* CTA Buttons */}
