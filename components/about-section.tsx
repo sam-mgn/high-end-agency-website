@@ -33,8 +33,8 @@ export function AboutSection() {
           {/* Right side - Content */}
           <div>
             <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-[#0D1826] leading-tight mb-6">
-              Nous Accompagnons Les Entreprises Dans Toute Leur{" "}
-              <span className="text-[#5AB4B4]">Communication</span>
+              Nous accompagnons les entreprises dans toute leur{" "}
+              <span className="text-[#5AB4B4]">communication</span>
             </h2>
 
             <p className="text-[#333C33] text-lg leading-relaxed mb-8">
