@@ -43,19 +43,7 @@ export function Footer() {
               Agence de communication stratégique dédiée à transformer 
               la présence de votre marque.
             </p>
-            {/* Social Links */}
-            <div className="flex gap-3">
-              {["LinkedIn", "Instagram", "Facebook"].map((social, idx) => (
-                <a
-                  key={idx}
-                  href="#"
-                  className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-[#5AB4B4] transition-colors"
-                  aria-label={social}
-                >
-                  <span className="text-white text-sm font-medium">{social.charAt(0)}</span>
-                </a>
-              ))}
-            </div>
+            
           </div>
 
           {/* Services */}
