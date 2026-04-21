@@ -57,7 +57,7 @@ export function TestimonialsSection() {
   ]
 
   return (
-    <section className="py-24 lg:py-32 bg-[#F8F9FA]">
+    <section className="py-24 lg:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Content */}
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start">
@@ -95,7 +95,7 @@ export function TestimonialsSection() {
               {visibleTestimonials.map((testimonial, index) => (
                 <div
                   key={`${currentIndex}-${index}`}
-                  className="flex-shrink-0 w-full sm:w-[calc(50%-12px)] bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-shadow duration-300"
+                  className="flex-shrink-0 w-full sm:w-[calc(50%-12px)] bg-[#F8F9FA] rounded-2xl p-8 hover:shadow-lg transition-shadow duration-300"
                 >
                   {/* Author Header */}
                   <div className="flex items-center gap-4 mb-6">
