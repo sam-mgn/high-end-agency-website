@@ -1,12 +1,12 @@
 "use client"
 
 import Link from "next/link"
-import { ArrowRight, Play } from "lucide-react"
+
 import { Button } from "@/components/ui/button"
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center bg-[#0D1826] overflow-hidden pt-20">
+    <section id="accueil" className="relative min-h-screen flex items-center bg-[#0D1826] overflow-hidden pt-28">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-20 left-10 w-72 h-72 bg-[#5AB4B4] rounded-full blur-[120px]" />
@@ -27,15 +27,13 @@ export function HeroSection() {
               <span className="text-[#5AB4B4] text-sm font-medium">Agence de Communication</span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-6" style={{ fontFamily: 'var(--font-space-grotesk)' }}>
-              <span className="text-[#5AB4B4]">CRÉATION</span>{" "}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-6 italic">
+              <span className="text-[#5AB4B4] not-italic font-black tracking-tight">CRÉATION</span>{" "}
               <span className="text-white">De Contenu</span>
               <br />
-              <span className="text-white">Stratégie De</span>
+              <span className="text-white">Stratégie De Communication</span>
               <br />
-              <span className="text-white">Communication</span>
-              <br />
-              <span className="text-[#5AB4B4]">Sur Mesure</span>
+              <span className="text-white">Sur Mesure</span>
             </h1>
 
             <p className="text-white/70 text-lg lg:text-xl max-w-xl mx-auto lg:mx-0 mb-10 leading-relaxed">
@@ -47,22 +45,20 @@ export function HeroSection() {
               <Button
                 asChild
                 size="lg"
-                className="bg-[#5AB4B4] text-[#0D1826] hover:bg-[#5AB4B4]/90 font-semibold px-8 py-6 text-base group"
+                className="bg-[#5AB4B4] text-[#0D1826] hover:bg-[#5AB4B4]/90 font-semibold px-8 py-6 text-sm uppercase tracking-wide rounded-full"
               >
-                <Link href="#contact">
-                  Démarrer votre projet
-                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <Link href="#services">
+                  Prestations
                 </Link>
               </Button>
               <Button
                 asChild
                 variant="outline"
                 size="lg"
-                className="border-white/20 text-white hover:bg-white/10 hover:text-white px-8 py-6 text-base group"
+                className="border-white/30 text-white hover:bg-white/10 hover:text-white px-8 py-6 text-sm uppercase tracking-wide rounded-full"
               >
-                <Link href="#realisations">
-                  <Play className="mr-2 w-5 h-5" />
-                  Voir nos réalisations
+                <Link href="#contact">
+                  Commencer
                 </Link>
               </Button>
             </div>
