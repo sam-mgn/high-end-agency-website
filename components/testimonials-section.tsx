@@ -63,11 +63,13 @@ export function TestimonialsSection() {
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start">
           {/* Left Side - Title */}
           <div className="lg:w-1/3 lg:sticky lg:top-32">
-            <span className="text-[#333C33]/50 text-sm font-medium uppercase tracking-wider">
-              Clients
-            </span>
-            <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-[#0D1826] leading-tight mt-4 mb-8">
-              Ce que disent nos clients
+            {/* Badge */}
+            <div className="inline-flex items-center bg-[#E5F0DD] rounded-full px-4 py-2 mb-6">
+              <span className="text-[#5AB4B4] text-sm font-medium">Témoignages</span>
+            </div>
+            <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-[#0D1826] leading-tight mb-8">
+              Ce Que Disent Nos{" "}
+              <span className="text-[#5AB4B4]">Clients</span>
             </h2>
             
             {/* Navigation Arrows */}
