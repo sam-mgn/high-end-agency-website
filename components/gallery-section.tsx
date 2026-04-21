@@ -30,6 +30,12 @@ const projects = [
     image: "/images/portfolio/vehicle-wrap.png",
     description: "Design de covering véhicule complet",
   },
+  {
+    title: "Cartes de Visite REOCOM",
+    category: "Print",
+    image: "/images/portfolio/reocom-business-cards.jpg",
+    description: "Cartes de visite professionnelles REOCOM",
+  },
 ]
 
 export function GallerySection() {
