@@ -1,97 +1,101 @@
 "use client"
 
-import { ExternalLink } from "lucide-react"
+import { useState } from "react"
+import Image from "next/image"
+
+const categories = ["Tout", "Branding", "Print", "Signalétique"]
 
 const projects = [
   {
-    title: "TechStart Rebrand",
-    category: "Identité Visuelle",
-    description: "Refonte complète de l'identité visuelle pour une startup tech.",
-    color: "bg-[#5AB4B4]",
-  },
-  {
-    title: "EcoBeauty Campaign",
-    category: "Stratégie Digitale",
-    description: "Campagne de lancement pour une marque de cosmétiques naturels.",
-    color: "bg-[#0D1826]",
-  },
-  {
-    title: "InnovaGroup",
-    category: "Communication Corporate",
-    description: "Stratégie de communication institutionnelle complète.",
-    color: "bg-[#333C33]",
-  },
-  {
-    title: "FoodieApp",
-    category: "Production Visuelle",
-    description: "Direction artistique et production de contenu visuel.",
-    color: "bg-[#5AB4B4]",
-  },
-  {
-    title: "FinTech Pro",
+    title: "Dashboard Google Ads",
     category: "Branding",
-    description: "Création d'une identité de marque premium pour une fintech.",
-    color: "bg-[#0D1826]",
+    image: "/images/portfolio/google-ads.jpg",
+    description: "Gestion de campagnes publicitaires et analytics",
   },
   {
-    title: "GreenEnergy",
-    category: "Marketing Digital",
-    description: "Stratégie de contenu et présence sociale pour une entreprise verte.",
-    color: "bg-[#333C33]",
+    title: "Roll-up Digise",
+    category: "Print",
+    image: "/images/portfolio/rollup-digise.jpg",
+    description: "Design de roll-up pour solutions multimédias",
+  },
+  {
+    title: "Cartes de Visite Digise",
+    category: "Print",
+    image: "/images/portfolio/business-cards.jpg",
+    description: "Création de cartes de visite professionnelles",
+  },
+  {
+    title: "Covering Véhicule Digise",
+    category: "Signalétique",
+    image: "/images/portfolio/vehicle-wrap.png",
+    description: "Design de covering véhicule complet",
   },
 ]
 
 export function GallerySection() {
+  const [activeCategory, setActiveCategory] = useState("Tout")
+
+  const filteredProjects = activeCategory === "Tout" 
+    ? projects 
+    : projects.filter(p => p.category === activeCategory)
+
   return (
-    <section id="realisations" className="py-24 lg:py-32 bg-[#E5F0DD]">
+    <section id="realisations" className="py-24 lg:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 bg-[#5AB4B4]/10 border border-[#5AB4B4]/30 rounded-full px-4 py-2 mb-6">
-            <span className="text-[#5AB4B4] text-sm font-medium">Portfolio</span>
-          </div>
-          <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-[#0D1826] leading-tight mb-6" style={{ fontFamily: 'var(--font-space-grotesk)' }}>
-            Découvrez Nos{" "}
-            <span className="text-[#5AB4B4]">Réalisations</span>
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <h2 className="text-3xl lg:text-4xl font-bold text-[#0D1826] leading-tight mb-4">
+            Découvrez Nos Projets de Communication Stratégique
           </h2>
-          <p className="text-[#333C33] text-lg leading-relaxed">
-            Une sélection de nos projets les plus impactants réalisés pour nos clients.
+          <p className="text-[#5AB4B4] text-xl font-medium">
+            Galerie de Travail
           </p>
         </div>
 
+        {/* Category Tabs */}
+        <div className="flex flex-wrap justify-center gap-4 mb-12">
+          {categories.map((category) => (
+            <button
+              key={category}
+              onClick={() => setActiveCategory(category)}
+              className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
+                activeCategory === category
+                  ? "bg-[#5AB4B4] text-[#0D1826]"
+                  : "bg-[#E5F0DD] text-[#333C33] hover:bg-[#5AB4B4]/20"
+              }`}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+
         {/* Gallery Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project, index) => (
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {filteredProjects.map((project, index) => (
             <div
               key={index}
               className="group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
             >
-              {/* Project visual placeholder */}
-              <div className={`${project.color} h-64 relative overflow-hidden`}>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-20 h-20 border-4 border-white/30 rounded-2xl flex items-center justify-center">
-                    <span className="text-white/50 text-3xl font-bold" style={{ fontFamily: 'var(--font-space-grotesk)' }}>
-                      {project.title.charAt(0)}
-                    </span>
-                  </div>
-                </div>
+              <div className="relative h-64 overflow-hidden">
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
                 {/* Hover overlay */}
-                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                  <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-                    <ExternalLink className="w-5 h-5 text-[#0D1826]" />
+                <div className="absolute inset-0 bg-[#0D1826]/70 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-6">
+                  <div className="text-center text-white">
+                    <h3 className="text-lg font-bold mb-2">{project.title}</h3>
+                    <p className="text-sm text-white/80">{project.description}</p>
                   </div>
                 </div>
               </div>
-
-              {/* Project info */}
-              <div className="p-6">
-                <span className="text-[#5AB4B4] text-sm font-medium">{project.category}</span>
-                <h3 className="text-xl font-bold text-[#0D1826] mt-2 mb-2" style={{ fontFamily: 'var(--font-space-grotesk)' }}>
-                  {project.title}
-                </h3>
-                <p className="text-[#333C33] text-sm leading-relaxed">
-                  {project.description}
-                </p>
+              {/* Category badge */}
+              <div className="absolute top-4 left-4">
+                <span className="bg-[#5AB4B4] text-[#0D1826] text-xs font-medium px-3 py-1 rounded-full">
+                  {project.category}
+                </span>
               </div>
             </div>
           ))}
