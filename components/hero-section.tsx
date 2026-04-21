@@ -26,8 +26,8 @@ export function HeroSection() {
         <div className="max-w-4xl">
           {/* Main Heading */}
           <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl leading-snug mb-8">
-            <span className="text-white font-light tracking-wide">Stratégie de Communication </span>
-            <span className="text-[#5AB4B4] font-bold tracking-tight">Sur Mesure</span>
+            <span className="block text-white font-light tracking-wide">Stratégie de Communication</span>
+            <span className="block text-[#5AB4B4] font-bold tracking-tight">Sur Mesure</span>
           </h1>
 
           {/* Subtitle */}
