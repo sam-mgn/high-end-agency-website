@@ -1,70 +1,62 @@
 "use client"
 
-
 import Image from "next/image"
 import { Mail, Phone, MapPin, Send, Instagram, Linkedin } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-
-import { useState, useRef } from "react";
-
-import emailjs from "@emailjs/browser";
-import { ENVIRONNEMENT_VARIABLES } from "@/lib/constants/info";
+import { useState, useRef } from "react"
+import emailjs from "@emailjs/browser"
+import { ENVIRONNEMENT_VARIABLES } from "@/lib/constants/info"
 
 export function ContactSection() {
-  const form = useRef<HTMLFormElement>(null);
+  const form = useRef<HTMLFormElement>(null)
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
     subject: "",
     message: "",
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
-  const [submitError, setSubmitError] = useState("");
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitSuccess, setSubmitSuccess] = useState(false)
+  const [submitError, setSubmitError] = useState("")
+
   const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+    const { name, value } = e.target
+    setFormData((prev) => ({ ...prev, [name]: value }))
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitError("");
-    setSubmitSuccess(false);
+    e.preventDefault()
+    setIsSubmitting(true)
+    setSubmitError("")
+    setSubmitSuccess(false)
     try {
       const result = await emailjs.sendForm(
         ENVIRONNEMENT_VARIABLES.EMAILJS_SERVICE_ID!,
         ENVIRONNEMENT_VARIABLES.EMAILJS_TEMPLATE_ID!,
         form.current as HTMLFormElement,
         ENVIRONNEMENT_VARIABLES.EMAILJS_PUBLIC_KEY
-      );
+      )
       if (result.text === "OK") {
-        setSubmitSuccess(true);
-        setFormData({
-          name: "",
-          email: "",
-          phone: "",
-          subject: "",
-          message: "",
-        });
+        setSubmitSuccess(true)
+        setFormData({ name: "", email: "", phone: "", subject: "", message: "" })
       } else {
-        throw new Error("Erreur lors de l'envoi du message");
+        throw new Error("Erreur lors de l'envoi du message")
       }
     } catch (error) {
-      console.error("Erreur d'envoi:", error);
+      console.error("Erreur d'envoi:", error)
       setSubmitError(
         "Une erreur est survenue lors de l'envoi du formulaire. Veuillez réessayer."
-      );
+      )
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false)
     }
-  };
+  }
+
   return (
     <section id="contact" className="py-16 lg:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -169,119 +161,105 @@ export function ContactSection() {
               Envoyez-nous un Message
             </h3>
             <form ref={form} onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid sm:grid-cols-2 gap-6">
                 <div>
-                  <label
-                    htmlFor="name"
-                    className="block text-sm font-medium text-white mb-1"
-                  >
-                    Nom complet *
+                  <label htmlFor="name" className="block text-sm font-medium text-[#333C33] mb-2">
+                    Nom complet
                   </label>
-                  <input
+                  <Input
                     type="text"
                     id="name"
                     name="name"
+                    placeholder="Votre nom"
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2 bg-cs-dark border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-cs-orange text-white"
+                    className="bg-white border-white focus:border-[#5AB4B4] focus:ring-[#5AB4B4]"
                   />
                 </div>
                 <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium text-white mb-1"
-                  >
-                    Email *
+                  <label htmlFor="email" className="block text-sm font-medium text-[#333C33] mb-2">
+                    Email
                   </label>
-                  <input
+                  <Input
                     type="email"
                     id="email"
                     name="email"
+                    placeholder="votre@email.com"
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2 bg-cs-dark border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-cs-orange text-white"
+                    className="bg-white border-white focus:border-[#5AB4B4] focus:ring-[#5AB4B4]"
                   />
                 </div>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+              <div className="grid sm:grid-cols-2 gap-6">
                 <div>
-                  <label
-                    htmlFor="phone"
-                    className="block text-sm font-medium text-white mb-1"
-                  >
-                    Téléphone *
+                  <label htmlFor="phone" className="block text-sm font-medium text-[#333C33] mb-2">
+                    Téléphone
                   </label>
-                  <input
+                  <Input
                     type="tel"
                     id="phone"
                     name="phone"
+                    placeholder="06 XX XX XX XX"
                     value={formData.phone}
                     onChange={handleChange}
-                    required
-                    className="w-full px-4 py-2 bg-cs-dark border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-cs-orange text-white"
+                    className="bg-white border-white focus:border-[#5AB4B4] focus:ring-[#5AB4B4]"
                   />
                 </div>
                 <div>
-                  <label
-                    htmlFor="subject"
-                    className="block text-sm font-medium text-white mb-1"
-                  >
-                    Sujet *
+                  <label htmlFor="subject" className="block text-sm font-medium text-[#333C33] mb-2">
+                    Sujet
                   </label>
-                  <select
+                  <Input
+                    type="text"
                     id="subject"
                     name="subject"
+                    placeholder="Sujet de votre message"
                     value={formData.subject}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2 bg-cs-dark border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-cs-orange text-white"
-                  >
-                    <option value="">Sélectionnez un sujet</option>
-                    <option value="devis-beton">Devis Béton Imprimé</option>
-                    <option value="devis-carrelage">Devis Carrelage</option>
-                    <option value="information">Demande d'information</option>
-                    <option value="autre">Autre</option>
-                  </select>
+                    className="bg-white border-white focus:border-[#5AB4B4] focus:ring-[#5AB4B4]"
+                  />
                 </div>
               </div>
+
               <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium text-white mb-1"
-                >
-                  Message *
+                <label htmlFor="message" className="block text-sm font-medium text-[#333C33] mb-2">
+                  Message
                 </label>
-                <textarea
+                <Textarea
                   id="message"
                   name="message"
+                  placeholder="Décrivez votre projet..."
                   value={formData.message}
                   onChange={handleChange}
                   required
-                  rows={5}
-                  className="w-full px-4 py-2 bg-cs-dark border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-cs-orange text-white"
-                ></textarea>
+                  className="bg-white border-white focus:border-[#5AB4B4] focus:ring-[#5AB4B4] min-h-[150px]"
+                />
               </div>
+
               {submitSuccess && (
-                <div className="p-4 bg-green-900/50 text-green-300 border border-green-700 rounded-md">
-                  Votre message a été envoyé avec succès. Nous vous contacterons dans
-                  les plus brefs délais.
+                <div className="p-4 bg-green-50 text-green-700 border border-green-200 rounded-lg">
+                  Votre message a été envoyé avec succès. Nous vous contacterons dans les plus brefs délais.
                 </div>
               )}
               {submitError && (
-                <div className="p-4 bg-red-900/50 text-red-300 border border-red-700 rounded-md">
+                <div className="p-4 bg-red-50 text-red-700 border border-red-200 rounded-lg">
                   {submitError}
                 </div>
               )}
-              <button
+
+              <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="btn btn-primary flex items-center gap-2"
+                className="w-full bg-[#5AB4B4] text-[#0D1826] hover:bg-[#4A9F9F] font-semibold py-6 rounded-full"
               >
                 {isSubmitting ? "Envoi en cours..." : "Envoyer"}
-                {!isSubmitting && <Send size={18} />}
-              </button>
+                {!isSubmitting && <Send className="ml-2 w-5 h-5" />}
+              </Button>
             </form>
           </div>
         </div>
