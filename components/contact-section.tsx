@@ -168,70 +168,120 @@ export function ContactSection() {
             <h3 className="text-2xl font-bold text-[#0D1826] mb-6">
               Envoyez-nous un Message
             </h3>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid sm:grid-cols-2 gap-6">
+            <form ref={form} onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-[#333C33] mb-2">
-                    Nom complet
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium text-white mb-1"
+                  >
+                    Nom complet *
                   </label>
-                  <Input
+                  <input
                     type="text"
-                    placeholder="Votre nom"
+                    id="name"
+                    name="name"
                     value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="bg-white border-white focus:border-[#5AB4B4] focus:ring-[#5AB4B4]"
+                    onChange={handleChange}
                     required
+                    className="w-full px-4 py-2 bg-cs-dark border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-cs-orange text-white"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-[#333C33] mb-2">
-                    Email
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-white mb-1"
+                  >
+                    Email *
                   </label>
-                  <Input
+                  <input
                     type="email"
-                    placeholder="votre@email.com"
+                    id="email"
+                    name="email"
                     value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="bg-white border-white focus:border-[#5AB4B4] focus:ring-[#5AB4B4]"
+                    onChange={handleChange}
                     required
+                    className="w-full px-4 py-2 bg-cs-dark border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-cs-orange text-white"
                   />
                 </div>
               </div>
-
-              <div>
-                <label className="block text-sm font-medium text-[#333C33] mb-2">
-                  Sujet
-                </label>
-                <Input
-                  type="text"
-                  placeholder="Sujet de votre message"
-                  value={formData.subject}
-                  onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                  className="bg-white border-white focus:border-[#5AB4B4] focus:ring-[#5AB4B4]"
-                  required
-                />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label
+                    htmlFor="phone"
+                    className="block text-sm font-medium text-white mb-1"
+                  >
+                    Téléphone *
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-2 bg-cs-dark border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-cs-orange text-white"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="subject"
+                    className="block text-sm font-medium text-white mb-1"
+                  >
+                    Sujet *
+                  </label>
+                  <select
+                    id="subject"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-2 bg-cs-dark border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-cs-orange text-white"
+                  >
+                    <option value="">Sélectionnez un sujet</option>
+                    <option value="devis-beton">Devis Béton Imprimé</option>
+                    <option value="devis-carrelage">Devis Carrelage</option>
+                    <option value="information">Demande d'information</option>
+                    <option value="autre">Autre</option>
+                  </select>
+                </div>
               </div>
-
               <div>
-                <label className="block text-sm font-medium text-[#333C33] mb-2">
-                  Message
+                <label
+                  htmlFor="message"
+                  className="block text-sm font-medium text-white mb-1"
+                >
+                  Message *
                 </label>
-                <Textarea
-                  placeholder="Décrivez votre projet..."
+                <textarea
+                  id="message"
+                  name="message"
                   value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="bg-white border-white focus:border-[#5AB4B4] focus:ring-[#5AB4B4] min-h-[150px]"
+                  onChange={handleChange}
                   required
-                />
+                  rows={5}
+                  className="w-full px-4 py-2 bg-cs-dark border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-cs-orange text-white"
+                ></textarea>
               </div>
-
-              <Button
+              {submitSuccess && (
+                <div className="p-4 bg-green-900/50 text-green-300 border border-green-700 rounded-md">
+                  Votre message a été envoyé avec succès. Nous vous contacterons dans
+                  les plus brefs délais.
+                </div>
+              )}
+              {submitError && (
+                <div className="p-4 bg-red-900/50 text-red-300 border border-red-700 rounded-md">
+                  {submitError}
+                </div>
+              )}
+              <button
                 type="submit"
-                className="w-full bg-[#5AB4B4] text-[#0D1826] hover:bg-[#4A9F9F] font-semibold py-6 rounded-full"
+                disabled={isSubmitting}
+                className="btn btn-primary flex items-center gap-2"
               >
-                Envoyer
-                <Send className="ml-2 w-5 h-5" />
-              </Button>
+                {isSubmitting ? "Envoi en cours..." : "Envoyer"}
+                {!isSubmitting && <Send size={18} />}
+              </button>
             </form>
           </div>
         </div>
