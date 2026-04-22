@@ -1,121 +1,245 @@
 "use client"
 
-import { useState } from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { useState, useCallback } from "react"
+import { ArrowLeft, ArrowRight, Star } from "lucide-react"
+
+const ANIM_MS    = 700
+const CARD_W     = 65    // % of right column
+const GAP        = 24    // px (gap-6)
+const PEEK_OPT   = 0.22  // opacity of peek card
+
+/*
+ * Three positions:
+ *   CENTER    : left 0,                    opacity 1
+ *   PEEK      : left calc(65% + 24px),     opacity PEEK_OPT  (half visible)
+ *   FAR_RIGHT : translateX(100%+24px) from PEEK slot  (off-screen, invisible)
+ *
+ * NEXT → : center collapses · peek slides → center · far-right slides → peek
+ * PREV ← : center slides → peek · peek slides → far-right · prev grows from behind → center
+ */
 
 const testimonials = [
   {
-    content: "REOCOM a complètement transformé notre image de marque. Leur approche stratégique et leur créativité ont fait toute la différence pour notre entreprise.",
-    name: "Marie Dupont",
-    role: "CEO, TechStart",
-    initials: "MD",
+    content: "REOCOM a su capturer l'identité de notre marque et la traduire en une stratégie de communication percutante. Une collaboration précieuse.",
+    name: "Camille Roux",
+    role: "Directrice Générale, Atelier Lumière",
+    avatar: "https://i.pravatar.cc/96?img=47",
+    rating: 5,
   },
   {
-    content: "Une équipe exceptionnelle qui comprend vraiment les enjeux de la communication moderne. Résultats au-delà de nos attentes.",
-    name: "Pierre Martin",
-    role: "Directeur Marketing, InnovaGroup",
-    initials: "PM",
+    content: "Une équipe à l'écoute, créative et rigoureuse. Ils ont transformé notre présence digitale en quelques semaines. Résultats au-delà des attentes.",
+    name: "Antoine Lefèvre",
+    role: "Directeur Marketing, Groupe Meridia",
+    avatar: "https://i.pravatar.cc/96?img=52",
+    rating: 5,
   },
   {
-    content: "Professionnalisme et créativité au rendez-vous. Notre identité visuelle a été repensée avec brio et notre présence digitale s'est considérablement améliorée.",
-    name: "Sophie Laurent",
-    role: "Fondatrice, EcoBeauty",
-    initials: "SL",
+    content: "Professionnalisme et sens esthétique au rendez-vous. Notre identité visuelle a été repensée avec brio. Je recommande sans hésiter.",
+    name: "Lucie Garnier",
+    role: "Fondatrice, Maison Verde",
+    avatar: "https://i.pravatar.cc/96?img=32",
+    rating: 5,
   },
   {
-    content: "Collaboration fluide et résultats impressionnants. L'équipe REOCOM a su capturer l'essence de notre marque parfaitement.",
-    name: "Thomas Bernard",
-    role: "Directeur Général, Digise",
-    initials: "TB",
+    content: "Collaboration fluide du début à la fin. L'équipe REOCOM comprend vraiment les enjeux business derrière chaque décision créative.",
+    name: "Thomas Girard",
+    role: "CEO, Innov&Co",
+    avatar: "https://i.pravatar.cc/96?img=68",
+    rating: 5,
   },
 ]
 
+type Testimonial = (typeof testimonials)[0]
 
+function TestimonialCard({ content, name, role, avatar, rating }: Testimonial) {
+  return (
+    <div className="bg-[#F8F9FA] rounded-2xl p-8 h-full">
+      <div className="flex gap-1 mb-5">
+        {Array.from({ length: rating }).map((_, i) => (
+          <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
+        ))}
+      </div>
+      <p className="text-[#333C33] leading-relaxed text-base mb-8">{content}</p>
+      <div className="flex items-center gap-4">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={avatar}
+          alt={name}
+          className="w-12 h-12 rounded-full object-cover flex-shrink-0"
+        />
+        <div>
+          <p className="text-[#0D1826] font-semibold text-sm">{name}</p>
+          <p className="text-[#333C33]/60 text-sm">{role}</p>
+        </div>
+      </div>
+    </div>
+  )
+}
 
 export function TestimonialsSection() {
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [isTransitioning, setIsTransitioning] = useState(false)
+  const [direction, setDirection] = useState<"next" | "prev">("next")
 
-  const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length)
-  }
+  const n         = testimonials.length
+  const peekIdx   = (currentIndex + 1) % n
+  const nextPeek  = (currentIndex + 2) % n
+  const prevIdx   = (currentIndex - 1 + n) % n
 
-  const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
-  }
+  const navigate = useCallback(
+    (dir: "next" | "prev") => {
+      if (isTransitioning) return
+      setDirection(dir)
+      setIsTransitioning(true)
+      setTimeout(() => {
+        setCurrentIndex((prev) =>
+          dir === "next" ? (prev + 1) % n : (prev - 1 + n) % n
+        )
+        setIsTransitioning(false)
+      }, ANIM_MS)
+    },
+    [isTransitioning, n]
+  )
 
-  // Get visible testimonials (current and next)
-  const visibleTestimonials = [
-    testimonials[currentIndex],
-    testimonials[(currentIndex + 1) % testimonials.length],
-  ]
+  const ctrStyle  = { left: 0,                               width: `${CARD_W}%` } as React.CSSProperties
+  const pkStyle   = { left: `calc(${CARD_W}% + ${GAP}px)`,  width: `${CARD_W}%` } as React.CSSProperties
 
   return (
-    <section className="py-16 lg:py-20 bg-white">
+    <section className="py-16 lg:py-24 bg-white">
+      <style>{`
+        /* ── NEXT → ── */
+        @keyframes ctrCollapse {
+          from { transform: scale(1);    opacity: 1; }
+          to   { transform: scale(0.05); opacity: 0; }
+        }
+        @keyframes pkToCenter {
+          from { transform: translateX(0);                       opacity: ${PEEK_OPT}; }
+          to   { transform: translateX(calc(-100% - ${GAP}px)); opacity: 1; }
+        }
+        @keyframes farRightIn {
+          from { transform: translateX(calc(100% + ${GAP}px));  opacity: 0; }
+          to   { transform: translateX(0);                       opacity: ${PEEK_OPT}; }
+        }
+
+        /* ── PREV ← ── */
+        @keyframes ctrToPeek {
+          from { transform: translateX(0);                      opacity: 1; }
+          to   { transform: translateX(calc(100% + ${GAP}px)); opacity: ${PEEK_OPT}; }
+        }
+        @keyframes prevExpand {
+          from { transform: scale(0.05); opacity: 0; }
+          to   { transform: scale(1);    opacity: 1; }
+        }
+        @keyframes pkSlideOut {
+          from { transform: translateX(0);                      opacity: ${PEEK_OPT}; }
+          to   { transform: translateX(calc(100% + ${GAP}px)); opacity: 0; }
+        }
+
+        .t-ctr-collapse  { animation: ctrCollapse ${ANIM_MS}ms cubic-bezier(0.4,0,0.2,1) both; }
+        .t-pk-to-ctr     { animation: pkToCenter  ${ANIM_MS}ms cubic-bezier(0.4,0,0.2,1) both; }
+        .t-far-right-in  { animation: farRightIn  ${ANIM_MS}ms cubic-bezier(0.4,0,0.2,1) both; }
+        .t-ctr-to-pk     { animation: ctrToPeek   ${ANIM_MS}ms cubic-bezier(0.4,0,0.2,1) both; }
+        .t-prev-expand   { animation: prevExpand  ${ANIM_MS}ms cubic-bezier(0.4,0,0.2,1) both; }
+        .t-pk-slide-out  { animation: pkSlideOut  ${ANIM_MS}ms cubic-bezier(0.4,0,0.2,1) both; }
+      `}</style>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Main Content */}
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start">
-          {/* Left Side - Title */}
-          <div className="lg:w-1/3 lg:sticky lg:top-32">
-            {/* Badge */}
-            <div className="inline-flex items-center bg-[#E5F0DD] rounded-full px-4 py-2 mb-6">
-              <span className="text-[#5AB4B4] text-sm font-medium">Témoignages</span>
-            </div>
-            <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-[#0D1826] leading-tight mb-8">
-              Ce que disent nos{" "}
+
+          {/* Left — heading + arrows */}
+          <div className="lg:w-[35%] lg:sticky lg:top-32">
+            <p className="text-xs font-semibold tracking-widest uppercase text-[#5AB4B4] mb-5">
+              Clients
+            </p>
+            <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-[#0D1826] leading-tight mb-10">
+              Ce que disent{" "}
+              <br className="hidden lg:block" />
+              nos{" "}
               <span className="text-[#5AB4B4]">clients</span>
             </h2>
-            
-            {/* Navigation Arrows */}
-            <div className="flex items-center gap-4">
+
+            {/* Left = NEXT (peek slides in), Right = PREV (center pushes right) */}
+            <div className="flex items-center gap-3">
               <button
-                onClick={prevSlide}
-                className="w-12 h-12 rounded-full border border-[#0D1826]/20 flex items-center justify-center hover:bg-[#0D1826] hover:text-white hover:border-[#0D1826] transition-all"
-                aria-label="Previous testimonial"
+                onClick={() => navigate("next")}
+                disabled={isTransitioning}
+                aria-label="Témoignage suivant"
+                className="w-12 h-12 rounded-full border border-[#0D1826]/20 flex items-center justify-center hover:bg-[#0D1826] hover:text-white hover:border-[#0D1826] transition-all duration-200 disabled:opacity-40"
               >
-                <ChevronLeft className="w-5 h-5" />
+                <ArrowLeft className="w-5 h-5" />
               </button>
               <button
-                onClick={nextSlide}
-                className="w-12 h-12 rounded-full border border-[#0D1826]/20 flex items-center justify-center hover:bg-[#0D1826] hover:text-white hover:border-[#0D1826] transition-all"
-                aria-label="Next testimonial"
+                onClick={() => navigate("prev")}
+                disabled={isTransitioning}
+                aria-label="Témoignage précédent"
+                className="w-12 h-12 rounded-full border border-[#0D1826]/20 flex items-center justify-center hover:bg-[#0D1826] hover:text-white hover:border-[#0D1826] transition-all duration-200 disabled:opacity-40"
               >
-                <ChevronRight className="w-5 h-5" />
+                <ArrowRight className="w-5 h-5" />
               </button>
             </div>
           </div>
 
-          {/* Right Side - Testimonial Cards Slider */}
-          <div className="lg:w-2/3 overflow-hidden">
-            <div className="flex gap-6">
-              {visibleTestimonials.map((testimonial, index) => (
-                <div
-                  key={`${currentIndex}-${index}`}
-                  className="flex-shrink-0 w-full sm:w-[calc(50%-12px)] bg-[#F8F9FA] rounded-2xl p-8 hover:shadow-lg transition-shadow duration-300"
-                >
-                  {/* Author Header */}
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="w-14 h-14 bg-[#0D1826] rounded-full flex items-center justify-center">
-                      <span className="text-white font-semibold text-lg">
-                        {testimonial.initials}
-                      </span>
-                    </div>
-                    <div>
-                      <p className="text-[#0D1826] font-semibold text-lg">{testimonial.name}</p>
-                      <p className="text-[#333C33]/60 text-sm">{testimonial.role}</p>
-                    </div>
+          {/* Right — 3-position carousel */}
+          <div className="lg:w-[65%] min-w-0">
+            <div className="relative overflow-hidden">
+
+              {/* Spacer — normal flow, defines container height */}
+              <div className="invisible pointer-events-none" style={ctrStyle} aria-hidden="true">
+                <TestimonialCard {...testimonials[currentIndex]} />
+              </div>
+
+              {/* ── IDLE ── */}
+              {!isTransitioning && (
+                <>
+                  <div className="absolute top-0 bottom-0" style={ctrStyle}>
+                    <TestimonialCard {...testimonials[currentIndex]} />
                   </div>
+                  <div className="absolute top-0 bottom-0" style={{ ...pkStyle, opacity: PEEK_OPT }}>
+                    <TestimonialCard {...testimonials[peekIdx]} />
+                  </div>
+                </>
+              )}
 
-                  {/* Content */}
-                  <p className="text-[#333C33] leading-relaxed text-base">
-                    {testimonial.content}
-                  </p>
-                </div>
-              ))}
+              {/* ── NEXT → ── */}
+              {isTransitioning && direction === "next" && (
+                <>
+                  {/* Centre s'effondre */}
+                  <div className="absolute top-0 bottom-0 t-ctr-collapse" style={ctrStyle}>
+                    <TestimonialCard {...testimonials[currentIndex]} />
+                  </div>
+                  {/* Peek glisse → centre */}
+                  <div className="absolute top-0 bottom-0 t-pk-to-ctr" style={pkStyle}>
+                    <TestimonialCard {...testimonials[peekIdx]} />
+                  </div>
+                  {/* Hors-écran droite glisse → peek */}
+                  <div className="absolute top-0 bottom-0 t-far-right-in" style={pkStyle}>
+                    <TestimonialCard {...testimonials[nextPeek]} />
+                  </div>
+                </>
+              )}
+
+              {/* ── PREV ← ── */}
+              {isTransitioning && direction === "prev" && (
+                <>
+                  {/* Centre glisse → peek */}
+                  <div className="absolute top-0 bottom-0 t-ctr-to-pk" style={ctrStyle}>
+                    <TestimonialCard {...testimonials[currentIndex]} />
+                  </div>
+                  {/* Carte précédente grossit depuis derrière → centre */}
+                  <div className="absolute top-0 bottom-0 t-prev-expand" style={ctrStyle}>
+                    <TestimonialCard {...testimonials[prevIdx]} />
+                  </div>
+                  {/* Peek glisse → hors-écran droite */}
+                  <div className="absolute top-0 bottom-0 t-pk-slide-out" style={pkStyle}>
+                    <TestimonialCard {...testimonials[peekIdx]} />
+                  </div>
+                </>
+              )}
+
             </div>
           </div>
-        </div>
 
-        
+        </div>
       </div>
     </section>
   )
