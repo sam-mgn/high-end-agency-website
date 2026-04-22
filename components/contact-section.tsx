@@ -205,6 +205,7 @@ export function ContactSection() {
                     name="phone"
                     placeholder="06 XX XX XX XX"
                     value={formData.phone}
+                    pattern="[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}"
                     onChange={handleChange}
                     className="bg-white border-white focus:border-[#5AB4B4] focus:ring-[#5AB4B4]"
                   />
