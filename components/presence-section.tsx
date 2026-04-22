@@ -20,10 +20,10 @@ export function PresenceSection() {
               />
               <div className="flex items-center gap-3 mt-8">
                 <div className="bg-[#5AB4B4]/20 rounded-lg px-4 py-2 text-[#5AB4B4] text-sm">
-                  Early Premium
+                  Chartes graphiques
                 </div>
                 <div className="bg-[#5AB4B4]/20 rounded-lg px-4 py-2 text-[#5AB4B4] text-sm">
-                  Body Passionate
+                  Sessions de droits
                 </div>
               </div>
             </div>

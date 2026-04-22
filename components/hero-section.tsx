@@ -17,7 +17,6 @@ export function HeroSection() {
           priority
           quality={90}
         />
-        {/* Dark overlay */}
         <div className="absolute inset-0 bg-[#0D1826]/75" />
       </div>
 
@@ -25,13 +24,13 @@ export function HeroSection() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20 lg:pt-40 lg:pb-32">
         <div className="max-w-4xl">
           {/* Main Heading */}
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl leading-snug mb-8">
-            <span className="block text-white font-light tracking-wide">Stratégie de Communication</span>
+          <h1 className="text-5xl sm:text-6xl lg:text-6xl xl:text-7xl leading-tight mb-8">
+            <span className="block text-white font-semibold tracking-wide">Stratégie de Communication</span>
             <span className="block text-[#5AB4B4] font-bold tracking-tight">Sur Mesure</span>
           </h1>
 
-          {/* Subtitle */}
-          <p className="text-white/70 text-base lg:text-lg max-w-2xl mb-10 leading-relaxed">
+          {/* Subtitle / tagline */}
+          <p className="text-white/90 text-xl sm:text-2xl lg:text-xl max-w-2xl mb-10 leading-relaxed font-medium">
             Nous accompagnons les entreprises dans leur communication digitale. De l&apos;identité visuelle à la stratégie de contenu, nous créons des solutions sur mesure pour valoriser votre marque.
           </p>
 
@@ -40,7 +39,7 @@ export function HeroSection() {
             <Button
               asChild
               size="lg"
-              className="bg-[#5AB4B4] text-[#0D1826] hover:bg-[#4A9F9F] font-semibold px-8 py-6 text-sm uppercase tracking-wider rounded-full"
+              className="bg-[#5AB4B4] text-[#0D1826] hover:bg-[#4A9F9F] font-bold px-8 py-6 text-base uppercase tracking-wider rounded-full"
             >
               <Link href="#services">
                 Découvrir nos services
@@ -50,7 +49,7 @@ export function HeroSection() {
               asChild
               variant="outline"
               size="lg"
-              className="border-2 border-[#5AB4B4] text-[#5AB4B4] hover:bg-[#5AB4B4] hover:text-[#0D1826] px-8 py-6 text-sm uppercase tracking-wider rounded-full bg-transparent font-semibold transition-all"
+              className="border-2 border-[#5AB4B4] text-[#5AB4B4] hover:bg-[#5AB4B4] hover:text-[#0D1826] px-8 py-6 text-base uppercase tracking-wider rounded-full bg-transparent font-bold transition-all"
             >
               <Link href="#contact">
                 Devis

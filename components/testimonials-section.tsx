@@ -150,9 +150,6 @@ export function TestimonialsSection() {
 
           {/* Left — heading + arrows */}
           <div className="lg:w-[35%] lg:sticky lg:top-32">
-            <p className="text-xs font-semibold tracking-widest uppercase text-[#5AB4B4] mb-5">
-              Clients
-            </p>
             <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-[#0D1826] leading-tight mb-10">
               Ce que disent{" "}
               <br className="hidden lg:block" />

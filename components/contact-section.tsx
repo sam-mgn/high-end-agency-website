@@ -1,6 +1,5 @@
 "use client"
 
-import Image from "next/image"
 import { Mail, Phone, MapPin, Send, Instagram, Linkedin } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -71,8 +70,9 @@ export function ContactSection() {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* Left side - Contact Info & Images */}
-          <div className="space-y-8">
+          {/* Left column — contact info + map stacked */}
+          <div className="flex flex-col gap-8">
+            {/* Contact Info */}
             <div className="bg-[#0D1826] rounded-2xl p-8">
               <h3 className="text-2xl font-bold text-white mb-6">
                 Restons En Contact
@@ -109,12 +109,11 @@ export function ContactSection() {
                   </div>
                   <div>
                     <p className="text-white/60 text-sm">Localisation</p>
-                    <p className="text-white">France</p>
+                    <p className="text-white">Chartres, France</p>
                   </div>
                 </div>
               </div>
 
-              {/* Social Links */}
               <div className="mt-8 pt-8 border-t border-white/10">
                 <p className="text-white/60 text-sm mb-4">Suivez-nous</p>
                 <div className="flex gap-3">
@@ -134,28 +133,22 @@ export function ContactSection() {
               </div>
             </div>
 
-            {/* Portfolio Preview Images */}
-            <div className="grid grid-cols-2 gap-4">
-              <div className="relative h-40 rounded-xl overflow-hidden">
-                <Image
-                  src="/images/portfolio/business-cards.jpg"
-                  alt="Cartes de visite"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="relative h-40 rounded-xl overflow-hidden">
-                <Image
-                  src="/images/portfolio/rollup-digise.jpg"
-                  alt="Roll-up design"
-                  fill
-                  className="object-cover"
-                />
-              </div>
+            {/* Google Maps — Chartres */}
+            <div className="rounded-2xl overflow-hidden flex-1 min-h-[240px]">
+              <iframe
+                src="https://maps.google.com/maps?q=Chartres,France&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                width="100%"
+                height="100%"
+                style={{ border: 0, minHeight: "240px" }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Localisation Chartres"
+              />
             </div>
           </div>
 
-          {/* Right side - Contact Form */}
+          {/* Right column — Contact Form */}
           <div className="bg-[#E5F0DD] rounded-2xl p-8">
             <h3 className="text-2xl font-bold text-[#0D1826] mb-6">
               Envoyez-nous un Message
