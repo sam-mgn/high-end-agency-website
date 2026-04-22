@@ -4,6 +4,7 @@ import { useState } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { MobileCarousel } from "@/components/mobile-carousel"
 
 const categories = ["Tout", "Branding", "Print", "Signalétique"]
 
@@ -43,14 +44,40 @@ const projects = [
 export function GallerySection() {
   const [activeCategory, setActiveCategory] = useState("Tout")
 
-  const filteredProjects = activeCategory === "Tout" 
-    ? projects 
+  const filteredProjects = activeCategory === "Tout"
+    ? projects
     : projects.filter(p => p.category === activeCategory)
 
+  const cards = filteredProjects.map((project, index) => (
+    <div
+      key={index}
+      className="group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
+    >
+      <div className="relative h-64 overflow-hidden">
+        <Image
+          src={project.image}
+          alt={project.title}
+          fill
+          className="object-cover group-hover:scale-105 transition-transform duration-500"
+        />
+        <div className="absolute inset-0 bg-[#0D1826]/70 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-6">
+          <div className="text-center text-white">
+            <h3 className="text-lg font-bold mb-2">{project.title}</h3>
+            <p className="text-sm text-white/80">{project.description}</p>
+          </div>
+        </div>
+      </div>
+      <div className="absolute top-4 left-4">
+        <span className="bg-[#5AB4B4] text-[#0D1826] text-xs font-medium px-3 py-1 rounded-full">
+          {project.category}
+        </span>
+      </div>
+    </div>
+  ))
+
   return (
-    <section id="realisations" className="py-16 lg:py-20 bg-[#F8FAF7]">
+    <section id="realisations" className="py-16 lg:py-20 bg-[#EAEFE8]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
           <h2 className="text-3xl lg:text-4xl font-bold text-[#0D1826] leading-tight mb-4">
             Découvrez nos projets de communication stratégique
@@ -60,7 +87,6 @@ export function GallerySection() {
           </p>
         </div>
 
-        {/* Category Tabs */}
         <div className="flex flex-wrap justify-center gap-4 mb-12">
           {categories.map((category) => (
             <button
@@ -77,39 +103,14 @@ export function GallerySection() {
           ))}
         </div>
 
-        {/* Gallery Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {filteredProjects.map((project, index) => (
-            <div
-              key={index}
-              className="group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
-            >
-              <div className="relative h-64 overflow-hidden">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                {/* Hover overlay */}
-                <div className="absolute inset-0 bg-[#0D1826]/70 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-6">
-                  <div className="text-center text-white">
-                    <h3 className="text-lg font-bold mb-2">{project.title}</h3>
-                    <p className="text-sm text-white/80">{project.description}</p>
-                  </div>
-                </div>
-              </div>
-              {/* Category badge */}
-              <div className="absolute top-4 left-4">
-                <span className="bg-[#5AB4B4] text-[#0D1826] text-xs font-medium px-3 py-1 rounded-full">
-                  {project.category}
-                </span>
-              </div>
-</div>
-            ))}
+        {/* Mobile: carousel — resets when filter changes */}
+        <MobileCarousel items={cards} resetKey={activeCategory} />
+
+        {/* Desktop: grid */}
+        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {cards}
         </div>
 
-        {/* CTA */}
         <div className="text-center mt-12">
           <Button
             asChild

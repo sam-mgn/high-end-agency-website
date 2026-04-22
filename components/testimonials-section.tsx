@@ -1,22 +1,12 @@
 "use client"
 
-import { useState, useCallback } from "react"
+import { useState, useCallback, useRef } from "react"
 import { ArrowLeft, ArrowRight, Star } from "lucide-react"
 
 const ANIM_MS    = 700
 const CARD_W     = 65    // % of right column
 const GAP        = 24    // px (gap-6)
 const PEEK_OPT   = 0.22  // opacity of peek card
-
-/*
- * Three positions:
- *   CENTER    : left 0,                    opacity 1
- *   PEEK      : left calc(65% + 24px),     opacity PEEK_OPT  (half visible)
- *   FAR_RIGHT : translateX(100%+24px) from PEEK slot  (off-screen, invisible)
- *
- * NEXT → : center collapses · peek slides → center · far-right slides → peek
- * PREV ← : center slides → peek · peek slides → far-right · prev grows from behind → center
- */
 
 const testimonials = [
   {
@@ -53,7 +43,7 @@ type Testimonial = (typeof testimonials)[0]
 
 function TestimonialCard({ content, name, role, avatar, rating }: Testimonial) {
   return (
-    <div className="bg-[#F8F9FA] rounded-2xl p-8 h-full">
+    <div className="bg-[#EAECEE] rounded-2xl p-8 h-full">
       <div className="flex gap-1 mb-5">
         {Array.from({ length: rating }).map((_, i) => (
           <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
@@ -80,6 +70,7 @@ export function TestimonialsSection() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isTransitioning, setIsTransitioning] = useState(false)
   const [direction, setDirection] = useState<"next" | "prev">("next")
+  const touchStartX = useRef<number | null>(null)
 
   const n         = testimonials.length
   const peekIdx   = (currentIndex + 1) % n
@@ -100,6 +91,17 @@ export function TestimonialsSection() {
     },
     [isTransitioning, n]
   )
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX
+  }
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return
+    const dx = e.changedTouches[0].clientX - touchStartX.current
+    if (Math.abs(dx) > 40) navigate(dx < 0 ? "next" : "prev")
+    touchStartX.current = null
+  }
 
   const ctrStyle  = { left: 0,                               width: `${CARD_W}%` } as React.CSSProperties
   const pkStyle   = { left: `calc(${CARD_W}% + ${GAP}px)`,  width: `${CARD_W}%` } as React.CSSProperties
@@ -158,7 +160,6 @@ export function TestimonialsSection() {
               <span className="text-[#5AB4B4]">clients</span>
             </h2>
 
-            {/* Left = NEXT (peek slides in), Right = PREV (center pushes right) */}
             <div className="flex items-center gap-3">
               <button
                 onClick={() => navigate("next")}
@@ -179,11 +180,15 @@ export function TestimonialsSection() {
             </div>
           </div>
 
-          {/* Right — 3-position carousel */}
-          <div className="lg:w-[65%] min-w-0">
+          {/* Right — carousel (swipeable on mobile) */}
+          <div
+            className="lg:w-[65%] min-w-0 w-full"
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+          >
             <div className="relative overflow-hidden">
 
-              {/* Spacer — normal flow, defines container height */}
+              {/* Spacer — defines container height */}
               <div className="invisible pointer-events-none" style={ctrStyle} aria-hidden="true">
                 <TestimonialCard {...testimonials[currentIndex]} />
               </div>
@@ -203,15 +208,12 @@ export function TestimonialsSection() {
               {/* ── NEXT → ── */}
               {isTransitioning && direction === "next" && (
                 <>
-                  {/* Centre s'effondre */}
                   <div className="absolute top-0 bottom-0 t-ctr-collapse" style={ctrStyle}>
                     <TestimonialCard {...testimonials[currentIndex]} />
                   </div>
-                  {/* Peek glisse → centre */}
                   <div className="absolute top-0 bottom-0 t-pk-to-ctr" style={pkStyle}>
                     <TestimonialCard {...testimonials[peekIdx]} />
                   </div>
-                  {/* Hors-écran droite glisse → peek */}
                   <div className="absolute top-0 bottom-0 t-far-right-in" style={pkStyle}>
                     <TestimonialCard {...testimonials[nextPeek]} />
                   </div>
@@ -221,15 +223,12 @@ export function TestimonialsSection() {
               {/* ── PREV ← ── */}
               {isTransitioning && direction === "prev" && (
                 <>
-                  {/* Centre glisse → peek */}
                   <div className="absolute top-0 bottom-0 t-ctr-to-pk" style={ctrStyle}>
                     <TestimonialCard {...testimonials[currentIndex]} />
                   </div>
-                  {/* Carte précédente grossit depuis derrière → centre */}
                   <div className="absolute top-0 bottom-0 t-prev-expand" style={ctrStyle}>
                     <TestimonialCard {...testimonials[prevIdx]} />
                   </div>
-                  {/* Peek glisse → hors-écran droite */}
                   <div className="absolute top-0 bottom-0 t-pk-slide-out" style={pkStyle}>
                     <TestimonialCard {...testimonials[peekIdx]} />
                   </div>
