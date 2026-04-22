@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 
 const footerLinks = {
   services: [
@@ -29,31 +30,20 @@ export function Footer() {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link href="/" className="inline-flex items-center mb-6">
-              <span className="text-[#5AB4B4] text-3xl font-bold tracking-tight" style={{ fontFamily: 'var(--font-space-grotesk)' }}>
-                R
-              </span>
-              <span className="text-white text-3xl font-bold tracking-tight" style={{ fontFamily: 'var(--font-space-grotesk)' }}>
-                EOCOM
-              </span>
+            <Link href="/" className="inline-block mb-6">
+              <Image
+                src="/images/logo-dark.png"
+                alt="REOCOM"
+                width={140}
+                height={40}
+                className="h-10 w-auto"
+              />
             </Link>
             <p className="text-white/60 leading-relaxed mb-6">
               Agence de communication stratégique dédiée à transformer 
               la présence de votre marque.
             </p>
-            {/* Social Links */}
-            <div className="flex gap-3">
-              {["LinkedIn", "Instagram", "Facebook"].map((social, idx) => (
-                <a
-                  key={idx}
-                  href="#"
-                  className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-[#5AB4B4] transition-colors"
-                  aria-label={social}
-                >
-                  <span className="text-white text-sm font-medium">{social.charAt(0)}</span>
-                </a>
-              ))}
-            </div>
+            
           </div>
 
           {/* Services */}

@@ -1,17 +1,13 @@
 import type { Metadata } from 'next'
-import { Inter, Space_Grotesk } from 'next/font/google'
+import { Mukta } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
-const inter = Inter({ 
-  subsets: ["latin"],
-  variable: '--font-inter',
-  display: 'swap',
-});
-
-const spaceGrotesk = Space_Grotesk({ 
-  subsets: ["latin"],
-  variable: '--font-space-grotesk',
+// Mukta as fallback for Kohinoor Bangla (Apple system font)
+const mukta = Mukta({
+  subsets: ["latin", "devanagari"],
+  weight: ["200", "300", "400", "500", "600", "700", "800"],
+  variable: '--font-mukta',
   display: 'swap',
 });
 
@@ -46,7 +42,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" className="bg-background">
-      <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans antialiased`}>
+      <body className={`${mukta.variable} font-sans antialiased`}>
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>

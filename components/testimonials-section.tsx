@@ -1,107 +1,121 @@
 "use client"
 
-import { Star, Quote } from "lucide-react"
+import { useState } from "react"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 
 const testimonials = [
   {
+    content: "REOCOM a complètement transformé notre image de marque. Leur approche stratégique et leur créativité ont fait toute la différence pour notre entreprise.",
     name: "Marie Dupont",
     role: "CEO, TechStart",
-    content: "REOCOM a complètement transformé notre image de marque. Leur approche stratégique et leur créativité ont dépassé toutes nos attentes. Notre visibilité a augmenté de 300% en 6 mois.",
-    rating: 5,
-    image: null,
+    initials: "MD",
   },
   {
+    content: "Une équipe exceptionnelle qui comprend vraiment les enjeux de la communication moderne. Résultats au-delà de nos attentes.",
     name: "Pierre Martin",
     role: "Directeur Marketing, InnovaGroup",
-    content: "Une équipe exceptionnelle qui comprend vraiment les enjeux de la communication moderne. Leur expertise en stratégie digitale a été déterminante pour notre croissance.",
-    rating: 5,
-    image: null,
+    initials: "PM",
   },
   {
+    content: "Professionnalisme et créativité au rendez-vous. Notre identité visuelle a été repensée avec brio et notre présence digitale s'est considérablement améliorée.",
     name: "Sophie Laurent",
     role: "Fondatrice, EcoBeauty",
-    content: "Le professionnalisme et la réactivité de REOCOM sont remarquables. Ils ont su créer une identité visuelle qui reflète parfaitement nos valeurs écologiques.",
-    rating: 5,
-    image: null,
+    initials: "SL",
+  },
+  {
+    content: "Collaboration fluide et résultats impressionnants. L'équipe REOCOM a su capturer l'essence de notre marque parfaitement.",
+    name: "Thomas Bernard",
+    role: "Directeur Général, Digise",
+    initials: "TB",
   },
 ]
 
-const stats = [
-  { value: "98%", label: "Clients Satisfaits" },
-  { value: "150+", label: "Projets Réalisés" },
-  { value: "3x", label: "ROI Moyen" },
-  { value: "24h", label: "Temps de Réponse" },
-]
+
 
 export function TestimonialsSection() {
+  const [currentIndex, setCurrentIndex] = useState(0)
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % testimonials.length)
+  }
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
+  }
+
+  // Get visible testimonials (current and next)
+  const visibleTestimonials = [
+    testimonials[currentIndex],
+    testimonials[(currentIndex + 1) % testimonials.length],
+  ]
+
   return (
-    <section className="py-24 lg:py-32 bg-white">
+    <section className="py-16 lg:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 bg-[#5AB4B4]/10 border border-[#5AB4B4]/30 rounded-full px-4 py-2 mb-6">
-            <span className="text-[#5AB4B4] text-sm font-medium">Témoignages</span>
-          </div>
-          <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-[#0D1826] leading-tight mb-6" style={{ fontFamily: 'var(--font-space-grotesk)' }}>
-            Résultats Concrets,{" "}
-            <span className="text-[#5AB4B4]">Clients Satisfaits</span>
-          </h2>
-          <p className="text-[#333C33] text-lg leading-relaxed">
-            Découvrez ce que nos clients disent de leur collaboration avec REOCOM.
-          </p>
-        </div>
-
-        {/* Testimonials Grid */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
-          {testimonials.map((testimonial, index) => (
-            <div
-              key={index}
-              className="bg-[#E5F0DD] rounded-2xl p-8 relative group hover:bg-[#0D1826] transition-all duration-300"
-            >
-              <Quote className="w-10 h-10 text-[#5AB4B4] mb-4" />
-              
-              <p className="text-[#333C33] group-hover:text-white/80 leading-relaxed mb-6 transition-colors">
-                &ldquo;{testimonial.content}&rdquo;
-              </p>
-
-              <div className="flex items-center gap-1 mb-4">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-[#5AB4B4] text-[#5AB4B4]" />
-                ))}
-              </div>
-
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-[#5AB4B4] rounded-full flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">
-                    {testimonial.name.charAt(0)}
-                  </span>
-                </div>
-                <div>
-                  <p className="font-semibold text-[#0D1826] group-hover:text-white transition-colors">
-                    {testimonial.name}
-                  </p>
-                  <p className="text-sm text-[#333C33] group-hover:text-white/60 transition-colors">
-                    {testimonial.role}
-                  </p>
-                </div>
-              </div>
+        {/* Main Content */}
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start">
+          {/* Left Side - Title */}
+          <div className="lg:w-1/3 lg:sticky lg:top-32">
+            {/* Badge */}
+            <div className="inline-flex items-center bg-[#E5F0DD] rounded-full px-4 py-2 mb-6">
+              <span className="text-[#5AB4B4] text-sm font-medium">Témoignages</span>
             </div>
-          ))}
-        </div>
+            <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-[#0D1826] leading-tight mb-8">
+              Ce que disent nos{" "}
+              <span className="text-[#5AB4B4]">clients</span>
+            </h2>
+            
+            {/* Navigation Arrows */}
+            <div className="flex items-center gap-4">
+              <button
+                onClick={prevSlide}
+                className="w-12 h-12 rounded-full border border-[#0D1826]/20 flex items-center justify-center hover:bg-[#0D1826] hover:text-white hover:border-[#0D1826] transition-all"
+                aria-label="Previous testimonial"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button
+                onClick={nextSlide}
+                className="w-12 h-12 rounded-full border border-[#0D1826]/20 flex items-center justify-center hover:bg-[#0D1826] hover:text-white hover:border-[#0D1826] transition-all"
+                aria-label="Next testimonial"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
 
-        {/* Stats */}
-        <div className="bg-[#0D1826] rounded-2xl p-8 lg:p-12">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <p className="text-4xl lg:text-5xl font-bold text-[#5AB4B4] mb-2" style={{ fontFamily: 'var(--font-space-grotesk)' }}>
-                  {stat.value}
-                </p>
-                <p className="text-white/70">{stat.label}</p>
-              </div>
-            ))}
+          {/* Right Side - Testimonial Cards Slider */}
+          <div className="lg:w-2/3 overflow-hidden">
+            <div className="flex gap-6">
+              {visibleTestimonials.map((testimonial, index) => (
+                <div
+                  key={`${currentIndex}-${index}`}
+                  className="flex-shrink-0 w-full sm:w-[calc(50%-12px)] bg-[#F8F9FA] rounded-2xl p-8 hover:shadow-lg transition-shadow duration-300"
+                >
+                  {/* Author Header */}
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="w-14 h-14 bg-[#0D1826] rounded-full flex items-center justify-center">
+                      <span className="text-white font-semibold text-lg">
+                        {testimonial.initials}
+                      </span>
+                    </div>
+                    <div>
+                      <p className="text-[#0D1826] font-semibold text-lg">{testimonial.name}</p>
+                      <p className="text-[#333C33]/60 text-sm">{testimonial.role}</p>
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <p className="text-[#333C33] leading-relaxed text-base">
+                    {testimonial.content}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
+
+        
       </div>
     </section>
   )

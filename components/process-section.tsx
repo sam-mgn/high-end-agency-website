@@ -1,6 +1,8 @@
 "use client"
 
-import { Search, Lightbulb, Rocket, BarChart } from "lucide-react"
+import { Search, Lightbulb, Rocket, BarChart3 } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 const steps = [
   {
@@ -26,7 +28,7 @@ const steps = [
   },
   {
     number: "04",
-    icon: BarChart,
+    icon: BarChart3,
     title: "Optimisation & Suivi",
     description: "Nous mesurons les résultats et optimisons continuellement pour maximiser votre ROI.",
     details: ["Analyse des performances", "Ajustements continus", "Reporting régulier"],
@@ -35,63 +37,68 @@ const steps = [
 
 export function ProcessSection() {
   return (
-    <section className="py-24 lg:py-32 bg-[#E5F0DD]">
+    <section className="py-16 lg:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 bg-[#5AB4B4]/10 border border-[#5AB4B4]/30 rounded-full px-4 py-2 mb-6">
-            <span className="text-[#5AB4B4] text-sm font-medium">Notre Processus</span>
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          {/* Badge */}
+          <div className="inline-flex items-center bg-[#E5F0DD] rounded-full px-4 py-2 mb-6">
+            <span className="text-[#5AB4B4] text-sm font-medium">Notre Approche</span>
           </div>
-          <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-[#0D1826] leading-tight mb-6" style={{ fontFamily: 'var(--font-space-grotesk)' }}>
-            Boostez Votre Présence{" "}
-            <span className="text-[#5AB4B4]">En Ligne</span>
+          <h2 className="text-3xl lg:text-4xl font-bold text-[#0D1826]">
+            Une méthodologie{" "}
+            <span className="text-[#5AB4B4]">éprouvée</span>
           </h2>
-          <p className="text-[#333C33] text-lg leading-relaxed">
-            Une méthodologie éprouvée pour transformer votre vision en résultats concrets.
-          </p>
         </div>
 
-        {/* Process Steps */}
-        <div className="relative">
-          {/* Connection line */}
-          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-[#5AB4B4]/30 -translate-y-1/2" />
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {steps.map((step, index) => (
-              <div key={index} className="relative">
-                <div className="bg-white rounded-2xl p-8 h-full shadow-sm hover:shadow-xl transition-all duration-300 group">
-                  {/* Step number */}
-                  <div className="relative z-10 w-16 h-16 bg-[#0D1826] rounded-full flex items-center justify-center mb-6 mx-auto lg:mx-0">
-                    <span className="text-[#5AB4B4] text-xl font-bold" style={{ fontFamily: 'var(--font-space-grotesk)' }}>
-                      {step.number}
-                    </span>
-                  </div>
-
-                  {/* Icon */}
-                  <div className="w-12 h-12 bg-[#5AB4B4]/10 rounded-xl flex items-center justify-center mb-4 mx-auto lg:mx-0 group-hover:bg-[#5AB4B4] transition-colors">
-                    <step.icon className="w-6 h-6 text-[#5AB4B4] group-hover:text-white transition-colors" />
-                  </div>
-
-                  <h3 className="text-xl font-bold text-[#0D1826] mb-3 text-center lg:text-left" style={{ fontFamily: 'var(--font-space-grotesk)' }}>
-                    {step.title}
-                  </h3>
-
-                  <p className="text-[#333C33] mb-4 leading-relaxed text-center lg:text-left">
-                    {step.description}
-                  </p>
-
-                  <ul className="space-y-2">
-                    {step.details.map((detail, idx) => (
-                      <li key={idx} className="flex items-center gap-2 text-sm text-[#333C33]">
-                        <span className="w-1.5 h-1.5 bg-[#5AB4B4] rounded-full flex-shrink-0" />
-                        {detail}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+        {/* Process Cards */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {steps.map((step, index) => (
+            <div
+              key={index}
+              className="bg-[#F8FAF7] rounded-3xl p-8 hover:shadow-lg transition-shadow duration-300"
+            >
+              {/* Step number */}
+              <div className="w-14 h-14 bg-[#0D1826] rounded-full flex items-center justify-center mb-8">
+                <span className="text-white text-lg font-semibold italic">{step.number}</span>
               </div>
-            ))}
-          </div>
+
+              {/* Icon */}
+              <div className="mb-6">
+                <step.icon className="w-7 h-7 text-[#5AB4B4]" strokeWidth={1.5} />
+              </div>
+
+              {/* Title */}
+              <h3 className="text-xl font-bold text-[#0D1826] mb-4 leading-tight">
+                {step.title}
+              </h3>
+
+              {/* Description */}
+              <p className="text-[#333C33]/70 text-sm leading-relaxed mb-6">
+                {step.description}
+              </p>
+
+              {/* Points */}
+              <ul className="space-y-3">
+                {step.details.map((detail, idx) => (
+                  <li key={idx} className="flex items-center gap-3 text-sm text-[#333C33]">
+                    <span className="w-2 h-2 rounded-full bg-[#5AB4B4] flex-shrink-0" />
+                    {detail}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        {/* CTA */}
+        <div className="text-center mt-12">
+          <Button
+            asChild
+            className="bg-[#5AB4B4] text-[#0D1826] hover:bg-[#4A9F9F] font-semibold px-8 rounded-full"
+          >
+            <Link href="#contact">Commencer un projet</Link>
+          </Button>
         </div>
       </div>
     </section>
