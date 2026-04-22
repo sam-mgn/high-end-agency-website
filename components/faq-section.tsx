@@ -42,7 +42,7 @@ export function FaqSection() {
             {/* FAQ Image */}
             <div className="relative bg-[#E5F0DD] rounded-2xl p-8 flex items-center justify-center">
               <div className="text-center">
-                <div className="text-6xl lg:text-8xl font-bold text-[#5AB4B4] opacity-20">
+                <div className="text-6xl lg:text-8xl font-bold text-[#5AB4B4]">
                   FAQ
                 </div>
               </div>
