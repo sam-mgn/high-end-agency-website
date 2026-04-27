@@ -4,6 +4,7 @@ import { Palette, TrendingUp, Users, Megaphone, Camera, LineChart } from "lucide
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { MobileCarousel } from "@/components/mobile-carousel"
+import { Reveal } from "@/components/reveal"
 
 const services = [
   {
@@ -70,26 +71,32 @@ export function ServicesSection() {
     <section id="services" className="py-16 lg:py-20 bg-[#EAEFE8]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center bg-[#E5F0DD] rounded-full px-4 py-2 mb-6">
-            <span className="text-[#5AB4B4] text-sm font-medium">Nos Services</span>
+        <Reveal>
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <div className="inline-flex items-center bg-[#E5F0DD] rounded-full px-4 py-2 mb-6">
+              <span className="text-[#5AB4B4] text-sm font-medium">Nos Services</span>
+            </div>
+            <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-[#0D1826] leading-tight mb-6">
+              Des solutions complètes pour{" "}
+              <br className="hidden sm:block" />
+              votre <span className="text-[#5AB4B4]">communication</span>
+            </h2>
+            <p className="text-[#333C33] text-lg leading-relaxed">
+              Une gamme complète de services pour accompagner votre croissance, de la stratégie à l&apos;exécution créative.
+            </p>
           </div>
-          <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-[#0D1826] leading-tight mb-6">
-            Des solutions complètes pour{" "}
-            <br className="hidden sm:block" />
-            votre <span className="text-[#5AB4B4]">communication</span>
-          </h2>
-          <p className="text-[#333C33] text-lg leading-relaxed">
-            Une gamme complète de services pour accompagner votre croissance, de la stratégie à l&apos;exécution créative.
-          </p>
-        </div>
+        </Reveal>
 
         {/* Mobile: carousel */}
         <MobileCarousel items={cards} />
 
-        {/* Desktop: grid */}
+        {/* Desktop: grid with staggered reveal */}
         <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {cards}
+          {cards.map((card, i) => (
+            <Reveal key={i} delay={i * 80}>
+              {card}
+            </Reveal>
+          ))}
         </div>
 
         <div className="text-center mt-12">

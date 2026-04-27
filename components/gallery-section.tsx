@@ -5,6 +5,7 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { MobileCarousel } from "@/components/mobile-carousel"
+import { Reveal } from "@/components/reveal"
 
 const categories = ["Tout", "Branding", "Print", "Signalétique"]
 
@@ -78,37 +79,45 @@ export function GallerySection() {
   return (
     <section id="realisations" className="py-16 lg:py-20 bg-[#EAEFE8]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <h2 className="text-3xl lg:text-4xl font-bold text-[#0D1826] leading-tight mb-4">
-            Découvrez nos projets de communication stratégique
-          </h2>
-          <p className="text-[#5AB4B4] text-xl font-medium">
-            Galerie de travail
-          </p>
-        </div>
+        <Reveal>
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <h2 className="text-3xl lg:text-4xl font-bold text-[#0D1826] leading-tight mb-4">
+              Découvrez nos projets de communication stratégique
+            </h2>
+            <p className="text-[#5AB4B4] text-xl font-medium">
+              Galerie de travail
+            </p>
+          </div>
+        </Reveal>
 
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setActiveCategory(category)}
-              className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
-                activeCategory === category
-                  ? "bg-[#5AB4B4] text-[#0D1826]"
-                  : "bg-[#E5F0DD] text-[#333C33] hover:bg-[#5AB4B4]/20"
-              }`}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
+        <Reveal delay={100}>
+          <div className="flex flex-wrap justify-center gap-4 mb-12">
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setActiveCategory(category)}
+                className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
+                  activeCategory === category
+                    ? "bg-[#5AB4B4] text-[#0D1826]"
+                    : "bg-[#E5F0DD] text-[#333C33] hover:bg-[#5AB4B4]/20"
+                }`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+        </Reveal>
 
         {/* Mobile: carousel — resets when filter changes */}
         <MobileCarousel items={cards} resetKey={activeCategory} />
 
-        {/* Desktop: grid */}
+        {/* Desktop: grid with staggered reveal */}
         <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {cards}
+          {cards.map((card, i) => (
+            <Reveal key={`${activeCategory}-${i}`} delay={i * 80}>
+              {card}
+            </Reveal>
+          ))}
         </div>
 
         <div className="text-center mt-12">

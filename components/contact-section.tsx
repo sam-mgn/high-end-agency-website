@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { useState, useRef } from "react"
 import emailjs from "@emailjs/browser"
 import { ENVIRONNEMENT_VARIABLES } from "@/lib/constants/info"
+import { Reveal } from "@/components/reveal"
 
 export function ContactSection() {
   const form = useRef<HTMLFormElement>(null)
@@ -60,96 +61,104 @@ export function ContactSection() {
     <section id="contact" className="py-16 lg:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl lg:text-4xl font-bold text-[#0D1826] leading-tight mb-4">
-            Parlons de Vos Projets
-          </h2>
-          <p className="text-[#333C33] text-lg">
-            Contactez-nous pour discuter de votre stratégie de communication
-          </p>
-        </div>
+        <Reveal>
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-[#0D1826] leading-tight mb-4">
+              Parlons de Vos Projets
+            </h2>
+            <p className="text-[#333C33] text-lg">
+              Contactez-nous pour discuter de votre stratégie de communication
+            </p>
+          </div>
+        </Reveal>
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Left column — contact info + map stacked */}
-          <div className="flex flex-col gap-8">
+          <Reveal className="flex flex-col gap-8">
             {/* Contact Info */}
             <div className="bg-[#0D1826] rounded-2xl p-8">
-              <h3 className="text-2xl font-bold text-white mb-6">
+              <h3 className="text-2xl font-bold text-white mb-8">
                 Restons En Contact
               </h3>
 
-              <div className="space-y-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-[#5AB4B4]/20 rounded-full flex items-center justify-center">
-                    <Mail className="w-5 h-5 text-[#5AB4B4]" />
+              <div className="grid sm:grid-cols-[1fr_auto] gap-8 sm:gap-10">
+                {/* Left — coordonnées */}
+                <div className="space-y-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-[#5AB4B4]/20 rounded-full flex items-center justify-center flex-shrink-0">
+                      <Mail className="w-5 h-5 text-[#5AB4B4]" />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-white/60 text-sm">Email</p>
+                      <a href="mailto:contact@reocom.fr" className="text-white hover:text-[#5AB4B4] break-all">
+                        contact@reocom.fr
+                      </a>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-white/60 text-sm">Email</p>
-                    <a href="mailto:contact@reocom.fr" className="text-white hover:text-[#5AB4B4]">
-                      contact@reocom.fr
+
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-[#5AB4B4]/20 rounded-full flex items-center justify-center flex-shrink-0">
+                      <Phone className="w-5 h-5 text-[#5AB4B4]" />
+                    </div>
+                    <div>
+                      <p className="text-white/60 text-sm">Téléphone</p>
+                      <a href="tel:+33602299660" className="text-white hover:text-[#5AB4B4]">
+                        06.02.29.96.60
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-[#5AB4B4]/20 rounded-full flex items-center justify-center flex-shrink-0">
+                      <MapPin className="w-5 h-5 text-[#5AB4B4]" />
+                    </div>
+                    <div>
+                      <p className="text-white/60 text-sm">Localisation</p>
+                      <p className="text-white">Chartres, France</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right — social */}
+                <div className="border-t sm:border-t-0 sm:border-l border-white/10 pt-6 sm:pt-0 sm:pl-10 flex flex-col">
+                  <p className="text-white/60 text-sm mb-4">Suivez-nous</p>
+                  <div className="flex sm:flex-col gap-3">
+                    <a
+                      href="#"
+                      className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#5AB4B4] transition-colors"
+                      aria-label="Instagram"
+                    >
+                      <Instagram className="w-5 h-5 text-white" />
+                    </a>
+                    <a
+                      href="#"
+                      className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#5AB4B4] transition-colors"
+                      aria-label="LinkedIn"
+                    >
+                      <Linkedin className="w-5 h-5 text-white" />
                     </a>
                   </div>
-                </div>
-
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-[#5AB4B4]/20 rounded-full flex items-center justify-center">
-                    <Phone className="w-5 h-5 text-[#5AB4B4]" />
-                  </div>
-                  <div>
-                    <p className="text-white/60 text-sm">Téléphone</p>
-                    <a href="tel:+33602299660" className="text-white hover:text-[#5AB4B4]">
-                      06.02.29.96.60
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-[#5AB4B4]/20 rounded-full flex items-center justify-center">
-                    <MapPin className="w-5 h-5 text-[#5AB4B4]" />
-                  </div>
-                  <div>
-                    <p className="text-white/60 text-sm">Localisation</p>
-                    <p className="text-white">Chartres, France</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-8 pt-8 border-t border-white/10">
-                <p className="text-white/60 text-sm mb-4">Suivez-nous</p>
-                <div className="flex gap-3">
-                  <a
-                    href="#"
-                    className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#5AB4B4] transition-colors"
-                  >
-                    <Instagram className="w-5 h-5 text-white" />
-                  </a>
-                  <a
-                    href="#"
-                    className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#5AB4B4] transition-colors"
-                  >
-                    <Linkedin className="w-5 h-5 text-white" />
-                  </a>
                 </div>
               </div>
             </div>
 
             {/* Google Maps — Chartres */}
-            <div className="rounded-2xl overflow-hidden flex-1 min-h-[240px]">
+            <div className="rounded-2xl overflow-hidden flex-1 min-h-[280px]">
               <iframe
                 src="https://maps.google.com/maps?q=Chartres,France&t=&z=13&ie=UTF8&iwloc=&output=embed"
                 width="100%"
                 height="100%"
-                style={{ border: 0, minHeight: "240px" }}
+                style={{ border: 0, minHeight: "280px" }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 title="Localisation Chartres"
               />
             </div>
-          </div>
+          </Reveal>
 
           {/* Right column — Contact Form */}
-          <div className="bg-[#E5F0DD] rounded-2xl p-8">
+          <Reveal delay={120} className="bg-[#E5F0DD] rounded-2xl p-8">
             <h3 className="text-2xl font-bold text-[#0D1826] mb-6">
               Envoyez-nous un Message
             </h3>
@@ -254,7 +263,7 @@ export function ContactSection() {
                 {!isSubmitting && <Send className="ml-2 w-5 h-5" />}
               </Button>
             </form>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

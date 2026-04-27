@@ -7,6 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import { Reveal } from "@/components/reveal"
 
 const faqs = [
   {
@@ -33,38 +34,41 @@ export function FaqSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Left side - Title & Image */}
-          <div>
-            <h2 className="text-3xl lg:text-4xl font-bold text-[#0D1826] leading-tight mb-8">
-              Questions{" "}
-              <span className="text-[#5AB4B4]">fréquemment posées</span>
-            </h2>
+          <Reveal>
+            <div>
+              <h2 className="text-3xl lg:text-4xl font-bold text-[#0D1826] leading-tight mb-8">
+                Questions{" "}
+                <span className="text-[#5AB4B4]">fréquemment posées</span>
+              </h2>
 
-            {/* FAQ Image */}
-            <div className="relative bg-[#E5F0DD] rounded-2xl p-8 flex items-center justify-center">
-              <div className="text-center">
-                <div className="text-6xl lg:text-8xl font-bold text-[#5AB4B4]">
-                  FAQ
+              {/* FAQ Image */}
+              <div className="relative bg-[#E5F0DD] rounded-2xl p-8 flex items-center justify-center">
+                <div className="text-center">
+                  <div className="text-6xl lg:text-8xl font-bold text-[#5AB4B4]">
+                    FAQ
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </Reveal>
 
           {/* Right side - Accordion */}
           <div>
             <Accordion type="single" collapsible className="space-y-4">
               {faqs.map((faq, index) => (
-                <AccordionItem
-                  key={index}
-                  value={`item-${index}`}
-                  className="bg-[#E5F0DD] rounded-xl px-6 border-none"
-                >
-                  <AccordionTrigger className="text-left text-[#0D1826] font-semibold hover:text-[#5AB4B4] hover:no-underline py-6">
-                    {faq.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-[#333C33] leading-relaxed pb-6">
-                    {faq.answer}
-                  </AccordionContent>
-                </AccordionItem>
+                <Reveal key={index} delay={index * 80}>
+                  <AccordionItem
+                    value={`item-${index}`}
+                    className="bg-[#E5F0DD] rounded-xl px-6 border-none"
+                  >
+                    <AccordionTrigger className="text-left text-[#0D1826] font-semibold hover:text-[#5AB4B4] hover:no-underline py-6">
+                      {faq.question}
+                    </AccordionTrigger>
+                    <AccordionContent className="text-[#333C33] leading-relaxed pb-6">
+                      {faq.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                </Reveal>
               ))}
             </Accordion>
           </div>

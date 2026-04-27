@@ -3,6 +3,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
+import { Reveal } from "@/components/reveal"
 
 export function HeroSection() {
   return (
@@ -24,18 +25,22 @@ export function HeroSection() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20 lg:pt-40 lg:pb-32">
         <div className="max-w-4xl">
           {/* Main Heading */}
-          <h1 className="text-5xl sm:text-6xl lg:text-6xl xl:text-7xl leading-tight mb-8">
-            <span className="block text-white font-semibold tracking-wide">Stratégie de Communication</span>
-            <span className="block text-[#5AB4B4] font-bold tracking-tight">Sur Mesure</span>
-          </h1>
+          <Reveal>
+            <h1 className="text-5xl sm:text-6xl lg:text-6xl xl:text-7xl leading-tight mb-8">
+              <span className="block text-white font-semibold tracking-wide">Stratégie de Communication</span>
+              <span className="block text-[#5AB4B4] font-bold tracking-tight">Sur Mesure</span>
+            </h1>
+          </Reveal>
 
           {/* Subtitle / tagline */}
-          <p className="text-white/90 text-xl sm:text-2xl lg:text-xl max-w-2xl mb-10 leading-relaxed font-medium">
-            Nous accompagnons les entreprises dans leur communication digitale. De l&apos;identité visuelle à la stratégie de contenu, nous créons des solutions sur mesure pour valoriser votre marque.
-          </p>
+          <Reveal delay={150}>
+            <p className="text-white/90 text-xl sm:text-2xl lg:text-xl max-w-2xl mb-10 leading-relaxed font-medium">
+              Nous accompagnons les entreprises dans leur communication digitale. De l&apos;identité visuelle à la stratégie de contenu, nous créons des solutions sur mesure pour valoriser votre marque.
+            </p>
+          </Reveal>
 
           {/* CTA Buttons */}
-          <div className="flex flex-wrap items-center gap-4">
+          <Reveal delay={300} className="flex flex-wrap items-center gap-4">
             <Button
               asChild
               size="lg"
@@ -55,7 +60,7 @@ export function HeroSection() {
                 Devis
               </Link>
             </Button>
-          </div>
+          </Reveal>
         </div>
       </div>
 

@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useRef } from "react"
 import { ArrowLeft, ArrowRight, Star } from "lucide-react"
+import { Reveal } from "@/components/reveal"
 
 const ANIM_MS    = 700
 const CARD_W     = 65    // % of right column
@@ -149,7 +150,7 @@ export function TestimonialsSection() {
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start">
 
           {/* Left — heading + arrows */}
-          <div className="lg:w-[35%] lg:sticky lg:top-32">
+          <Reveal className="lg:w-[35%] lg:sticky lg:top-32">
             <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-[#0D1826] leading-tight mb-10">
               Ce que disent{" "}
               <br className="hidden lg:block" />
@@ -175,7 +176,7 @@ export function TestimonialsSection() {
                 <ArrowRight className="w-5 h-5" />
               </button>
             </div>
-          </div>
+          </Reveal>
 
           {/* Right — carousel (swipeable on mobile) */}
           <div

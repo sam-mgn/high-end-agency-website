@@ -17,9 +17,9 @@ const footerLinks = {
     { label: "FAQ", href: "#faq" },
   ],
   legal: [
-    { label: "Mentions Légales", href: "#" },
-    { label: "Politique de Confidentialité", href: "#" },
-    { label: "CGV", href: "#" },
+    { label: "Mentions Légales", href: "/mentions-legales" },
+    { label: "Politique de Confidentialité", href: "/confidentialite" },
+    { label: "CGV", href: "/cgv" },
   ],
 }
 
