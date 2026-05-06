@@ -22,6 +22,7 @@ export function Header() {
   const navItems = [
     { href: "#accueil", label: "ACCUEIL" },
     { href: "#apropos", label: "REOCOM" },
+    { href: "/blog", label: "BLOG" },
     { 
       href: "#services", 
       label: "PRESTATIONS",

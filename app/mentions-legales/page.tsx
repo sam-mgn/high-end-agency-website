@@ -1,10 +1,12 @@
 import type { Metadata } from "next"
 import { LegalLayout } from "@/components/legal-layout"
+import { buildPageMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
-  title: "Mentions Légales | REOCOM",
-  description: "Mentions légales du site REOCOM, agence de communication stratégique.",
-}
+export const metadata: Metadata = buildPageMetadata({
+  title: "Mentions Legales | REOCOM",
+  description: "Mentions legales du site REOCOM, agence de communication strategique.",
+  path: "/mentions-legales",
+})
 
 export default function MentionsLegalesPage() {
   return (

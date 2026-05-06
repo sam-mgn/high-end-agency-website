@@ -1,10 +1,12 @@
 import type { Metadata } from "next"
 import { LegalLayout } from "@/components/legal-layout"
+import { buildPageMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
-  title: "Conditions Générales de Vente | REOCOM",
-  description: "Conditions Générales de Vente des prestations REOCOM.",
-}
+export const metadata: Metadata = buildPageMetadata({
+  title: "Conditions Generales de Vente | REOCOM",
+  description: "Conditions Generales de Vente des prestations REOCOM.",
+  path: "/cgv",
+})
 
 export default function CgvPage() {
   return (

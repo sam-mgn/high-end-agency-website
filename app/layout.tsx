@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Mukta } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { buildPageMetadata } from "@/lib/seo"
 import './globals.css'
 
 // Mukta as fallback for Kohinoor Bangla (Apple system font)
@@ -12,26 +13,21 @@ const mukta = Mukta({
 });
 
 export const metadata: Metadata = {
-  title: 'REOCOM | Agence de Communication Stratégique',
-  description: 'Création de contenu et stratégie de communication sur mesure. Boostez votre présence en ligne avec une identité visuelle stratégique.',
+  ...buildPageMetadata({
+    title: "REOCOM | Agence de Communication Strategique",
+    description:
+      "Creation de contenu et strategie de communication sur mesure. Boostez votre presence en ligne avec une identite visuelle strategique.",
+    path: "/",
+  }),
   generator: 'REOCOM',
-  keywords: ['communication', 'branding', 'stratégie', 'identité visuelle', 'agence', 'marketing'],
   icons: {
     icon: [
       {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
+        url: '/1flaticon.svg',
         type: 'image/svg+xml',
       },
     ],
-    apple: '/apple-icon.png',
+    apple: '/1flaticon.svg',
   },
 }
 

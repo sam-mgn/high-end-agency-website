@@ -1,10 +1,12 @@
 import type { Metadata } from "next"
 import { LegalLayout } from "@/components/legal-layout"
+import { buildPageMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
-  title: "Politique de Confidentialité | REOCOM",
-  description: "Politique de confidentialité et protection des données personnelles de REOCOM.",
-}
+export const metadata: Metadata = buildPageMetadata({
+  title: "Politique de Confidentialite | REOCOM",
+  description: "Politique de confidentialite et protection des donnees personnelles de REOCOM.",
+  path: "/confidentialite",
+})
 
 export default function ConfidentialitePage() {
   return (

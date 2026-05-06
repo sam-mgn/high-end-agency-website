@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { Header } from "@/components/header"
 import { HeroSection } from "@/components/hero-section"
 import { AboutSection } from "@/components/about-section"
@@ -10,6 +11,14 @@ import { FaqSection } from "@/components/faq-section"
 import { CtaSection } from "@/components/cta-section"
 import { ContactSection } from "@/components/contact-section"
 import { Footer } from "@/components/footer"
+import { buildPageMetadata } from "@/lib/seo"
+
+export const metadata: Metadata = buildPageMetadata({
+  title: "REOCOM | Agence de Communication Strategique",
+  description:
+    "Agence de communication strategique a Chartres. Branding, contenu et strategie digitale pour accelerer votre croissance.",
+  path: "/",
+})
 
 export default function Home() {
   return (
