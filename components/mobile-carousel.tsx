@@ -74,10 +74,10 @@ export function MobileCarousel({ items, resetKey }: MobileCarouselProps) {
   const realIndex = ((index - 1) % n + n) % n
 
   return (
-    <div className="md:hidden">
+    <div className="md:hidden w-full max-w-full overflow-x-hidden">
       <div
         ref={containerRef}
-        className="overflow-hidden"
+        className="w-full max-w-full overflow-hidden"
         style={{ opacity: ready ? 1 : 0 }}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
@@ -92,7 +92,7 @@ export function MobileCarousel({ items, resetKey }: MobileCarouselProps) {
           }}
         >
           {cloned.map((item, i) => (
-            <div key={i} style={{ minWidth: `${CARD_PCT * 100}%`, flexShrink: 0 }}>
+            <div key={i} className="min-w-0" style={{ minWidth: `${CARD_PCT * 100}%`, flexShrink: 0, maxWidth: `${CARD_PCT * 100}%` }}>
               {item}
             </div>
           ))}
